@@ -1,12 +1,14 @@
 # Two Birds, One Stonebridge
 
-## Team 2 - Stonebridge
-
+**Team 2 — Stonebridge**  
 Will Sutton, Eric Mueller, Jase Peeler, Joseph Aguilar
 
-## Overall Goal
+## Project overview
 
-In consulting for Stonebridge, we aim to complete a full lifecycle data science project. The objective of this project is to explore the implications of and causes behind the bursting of injection wells. Injection wells are used to dispose of waste water created by the fracking process. More details will be posted here as we further determine the direction of this project.
+This repository hosts a short reproducible analysis for Week 7 and will serve as the foundation for our semester-long group project.  
+**Current assignment:** perform exploratory data analysis and a multiple regression on the *Ames Housing* dataset (file: `data/AmesHousing.csv`).  
+
+> NOTE: Our long-term consulting goal is to analyze injection well incidents for Stonebridge. For the Week 7 assignment we are using the Ames Housing dataset to demonstrate reproducible workflows and modeling steps. The README will be updated once the Stonebridge dataset and project scope are finalized.
 
 ## Week 7 - Group Kanban Assignment
 
