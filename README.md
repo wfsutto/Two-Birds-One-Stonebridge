@@ -36,7 +36,7 @@ Using the command line, run `pip install -r requirements.txt`. This will install
 
 #### Exploratory Analysis
 
-Next, run the cells in `exploratory_analysis_with_spatial.ipynb` sequentially. This notebook contains the exploratory data analysis stage for all internal OH data. It also goes through the data preparation stage for each created dataset. Lastly, it contains the foundations for our spatial analysis, calculating well locations and plotting them by well type.
+Next, run the cells in `Data_Processing_and_Well_Inventory.ipynb` sequentially. This notebook contains the exploratory data analysis stage for all internal OH data. It also goes through the data preparation stage for each created dataset, saving them to the `final` subfolder of `data`. Lastly, it contains the foundations for our spatial analysis, calculating well locations and plotting them by well type.
 
 ##### Expected Outputs
 
@@ -48,16 +48,45 @@ From this, we should expect to see:
 
 #### Distance Analysis
 
-Lastly, run the cells in `distance_analysis.ipynb` sequentially. This notebook contains the initial distance analysis, aiming to quantify the relationship between a well's distance to the nearest SWIW and its production. Here, you will find the nearest distance calculation as well as some simple linear regression analysis to quantify the high level relationship between distance and production.
+Next, run the cells in `SWIW_Proximity_and_Production_Analysis.ipynb` sequentially. This is the notebook that contains our Difference-in-Differences model comparing production before and after our split point.  The first model output seen is not a DiD, but instead our initial SLR model. This was not used in final analysis.
+
+The first DiD model is for horizontal wells, and it was not part of our final analysis. The next 6 DiD models are for each combination of oil/gas and no-lag/1-year-lag/2-years-lag. The overall model metrics will be at the top of these model summaries, and you can scroll to the bottom to see the individual feature coefficients for the model. The fixed effects can be ignored.
+
+After the 7 DiD models, we created visualizations for each model depicting the change in oil and gas production for each well used in the model dataset. These plots are interactive, and users can zoom in/out, pan, and hover over wells for more information. This feature is helpful to identify wells that can be used in future research.
+
+Lastly, we created line plots summarizing the results of the DiD models. For oil and for gas, we made plots showing the actual and relative production per well, aggregated by the number of relative quarters from the permitting of the nearest SWIW. 
 
 ##### Expected Outputs
 
 From this, we should expect to see:
 
 1. Datasets containing API Well Numbers and distance to nearest SWIW and nearest production well
-2. Basic SLR outputs, showing both correlation and significance test results
+2. Initial basic SLR output
+3. Each of the 7 DiD model summaries
+4. Four interactive plots showing the difference in production before and after the split date for wells used in the model
+5. Four line plots depicting actual and relative production over time relative to the permit date of the nearest SWIW
 
-> NOTE: as more analysis is completed, this README will update with instructions on how to replicate the analysis.
+#### Lag and Seasonal Analysis
+
+Lastly, run the cells in `Seasonal_Trends_and_Lagged_Production.ipynb` sequentially. This notebook was created before the DiD models, and the analysis within was done with the intention to help us select the number of lag years to use in our model and identify basic seasonal trends in the data.
+
+First, we load and aggregate the data as necessary. Then, for each of gas, oil, and brine, we plot the aggregated production by season, as well as a matrix with each of the seasonal averages. Next is a plot of seasonal averages split by distance to the nearest SWIW. We found that the seasonal effects were negligible.
+
+Next, we prepared the annual production data for the lag analysis and trained an OLS model to predict current year production data using lagged production data. We used lags of 1, 2, 3, and 4 years for each of gas and oil. The outputs of all the oil models can be seen first. Then we have a combined model using all four lag effects, then follows a plot of each model's $R^2$ value. Lastly, we see the same outputs for the gas models.
+
+##### Expected Outputs
+
+1. Seasonal aggregate plots for each of oil, gas, and brine
+2. Seasonal aggregate matrix
+3. Seasonal aggregation split by distance to nearest SWIW plot
+4. OLS Model outputs for the 5 models for each of oil and gas (4 individual and 1 combined for each, 10 total models)
+5. Plots of each individual model's $R^2$ value for oil and gas
+
+### Results
+
+Our `results` folder includes screenshots of most of the relevant plots used in our analysis. Because the individual well plots for the DiD models are interactive, they were unable to be saved. We also saved the model summaries for each of the 6 DiD models we used in our final analysis. 
+
+Also in this folder, we have included our final presentation, final video, and final writeup.
 
 ## Week 7 - Group Kanban Assignment
 
